@@ -1,0 +1,58 @@
+/* Created Using Easy HTML v1.4.8 */
+/* https://play.google.com/store/apps/details?id=ak.andro.easyhtml */
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #222;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #333, #000);
+}
+
+#player {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin-left: -30px;
+  background-image: url("https://i.ibb.co/mVQyHPH9/orca-image-1399064311-jpeg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.ball, .bomb {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* كرة */
+.ball {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLPmBj8t1G1E1ZUpqDuNEH0Yh_gY4fbjNjm5whtKq2-itC2OJ80-PghSc&s=10');
+}
+
+/* قنبلة */
+.bomb {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThxJts3yJjPx3K2BRlpEU7CXKj2pCwRW7uHLDuqHpIDJLfu3dc2SWIVKA&s=10');
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+}

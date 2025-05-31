@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- Created Using Easy HTML v1.4.8 -->
+<!-- https://play.google.com/store/apps/details?id=ak.andro.easyhtml -->
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>لعبة التقاط الكرة</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #222;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    #game {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(to bottom, #333, #000);
+    }
+
+    #player {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      width: 60px;
+      height: 80px;
+      margin-left: -30px;
+      background-image: url('player.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .ball, .bomb {
+      position: absolute;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    .ball {
+      background-color: lime;
+    }
+
+    .bomb {
+      background-color: red;
+    }
+
+    #score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+    }
+  </style>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="game">
+    <div id="player"></div>
+    <div id="score">النقاط: 0</div>
+  </div>
+  <script>
+    const player = document.getElementById("player");
+    const game = document.getElementById("game");
+    const scoreDisplay = document.getElementById("score");
+
+    let score = 0;
+    let playerX = window.innerWidth / 2;
+
+    document.addEventListener("mousemove", (e) => {
+      playerX = e.clientX;
+      player.style.left = `${playerX - 30}px`;
+    });
+
+    function createFallingItem() {
+      const item = document.createElement("div");
+      const isBall = Math.random() < 0.7;
+      item.className = isBall ? "ball" : "bomb";
+      item.style.left = `${Math.random() * (window.innerWidth - 30)}px`;
+      game.appendChild(item);
+
+      let top = 0;
+      const interval = setInterval(() => {
+        top += 5;
+        item.style.top = `${top}px`;
+
+        const itemRect = item.getBoundingClientRect();
+        const playerRect = player.getBoundingClientRect();
+
+        if (
+          itemRect.bottom >= playerRect.top &&
+          itemRect.left < playerRect.right &&
+          itemRect.right > playerRect.left
+        ) {
+          if (item.classList.contains("ball")) {
+            score++;
+          } else {
+            score = 0;
+          }
+          scoreDisplay.textContent = `النقاط: ${score}`;
+          item.remove();
+          clearInterval(interval);
+        }
+
+        if (top > window.innerHeight) {
+          item.remove();
+          clearInterval(interval);
+        }
+      }, 20);
+    }
+
+    setInterval(createFallingItem, 1000);
+  </script>
+<script src="./script.js"></script>
+</body>
+</html>
